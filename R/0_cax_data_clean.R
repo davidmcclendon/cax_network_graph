@@ -30,25 +30,7 @@ contact <- read_csv(here::here("cax_data", "Contact.csv")) %>%
     post911 = ifelse(is.na(post911) & enteredService_post911==1, 1, post911),
     post911 = ifelse(is.na(post911) & exitService_post911==1, 1, post911),
     post911 = ifelse(is.na(post911) & Birthdate==1, 1, post911),
-    
-    #Demographics
-    gender = ads_resourceman__Gender__c,
-    racethn = ifelse(ads_resourceman__Ethnicity__c %in% c("White;White", "White"), "White",
-                     ifelse(ads_resourceman__Ethnicity__c %in% c("Black"), "Black",
-                            ifelse(ads_resourceman__Ethnicity__c %in% c("Latino", "Latino;Latino"), "Latino",
-                                   ifelse(ads_resourceman__Ethnicity__c %in% c("Asian", "Pacific Islander"), "Asian/Pacific Islander",
-                                          ifelse(!is.na(ads_resourceman__Ethnicity__c), "Other/Multiple/Unknown", NA))))),
-    edu_level = ads_resourceman__Education_Level__c,
-    edu_status = ads_resourceman__Current_Education_Status__c,
-    emp_status = ads_resourceman__Current_Employment_Status__c,
-    housing_status = ads_resourceman__Current_Housing_Status__c,
-    marital_status = ads_resourceman__Marital_Status__c,
-    kid_status = ads_resourceman__Children__c,
-    zipcode = MailingPostalCode, #It's not bad
-    
-    #Needs
-    satisfied_w_life = ads_resourceman__Satisfied_with_life__c,
-    
+
     #Id Harvey victims
     enteredDuringHarvey = ifelse(enteredDate>="2017-08-25 00:00:00 UTC" & enteredDate<="2017-11-01 00:00:00 UTC", 1, 0),
     
@@ -118,11 +100,11 @@ contact <- left_join(contact, connection_service_harvey, by="ContactId") %>%
   
 
 #Merged Contact and Connection
-contact_to_merge <- dplyr::select(contact, ContactId, Name, post911:riskHarveyVictim) 
+contact_to_merge <- dplyr::select(contact, ContactId, post911:riskHarveyVictim) 
 
 merged <- left_join(connection, contact_to_merge, by="ContactId") %>% 
   arrange(ContactId, CaseNumber, CreatedDate) %>% 
-  dplyr::select(ContactId, Name:riskHarveyVictim, CaseNumber, CreatedDate, ClosedDate, everything())
+  dplyr::select(ContactId, post911:riskHarveyVictim, CaseNumber, CreatedDate, ClosedDate, everything())
 
 
 #Remove extraneous datasets-----
