@@ -1,0 +1,14 @@
+{
+  "name": "@davidmcclendon/serving-veterans-after-hurricane-harvey",
+  "main": "@davidmcclendon/serving-veterans-after-hurricane-harvey.js",
+  "version": "273.0.0",
+  "homepage": "https://observablehq.com/@davidmcclendon/serving-veterans-after-hurricane-harvey",
+  "author": {
+    "name": "David McClendon",
+    "url": "https://observablehq.com/@davidmcclendon"
+  },
+  "type": "module",
+  "peerDependencies": {
+    "@observablehq/runtime": "4"
+  }
+}
