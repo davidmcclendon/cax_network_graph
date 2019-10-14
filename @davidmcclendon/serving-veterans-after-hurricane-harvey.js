@@ -1,21 +1,7 @@
 // https://observablehq.com/@davidmcclendon/serving-veterans-after-hurricane-harvey@273
 export default function define(runtime, observer) {
   const main = runtime.module();
-  main.variable(observer()).define(["md"], function(md){return(
-md`# Serving veterans after Hurricane Harvey`
-)});
-  main.variable(observer()).define(["md"], function(md){return(
-md`
 
-In the graphic below, the blue dots represent **types of services**, and the red dots represent **service providers** in the [Combined Arms](https://combinedarms.us/) network.
-The size of the dots and links between services and providers show how many Harvey-affected clients accessed those services and providers in Houston.
-
-
-Code references: 
-* [force-directed-graph](https://observablehq.com/@d3/force-directed-graph)
-* [disjoint force-directed graph](https://observablehq.com/@d3/disjoint-force-directed-graph)
-* [cola](https://observablehq.com/@mbostock/hello-cola)`
-)});
   main.variable(observer("chart")).define("chart", ["data","d3","width","height","drag","color","text_size","text_weight","text_visibility","invalidation"], function(data,d3,width,height,drag,color,text_size,text_weight,text_visibility,invalidation)
 {
   
